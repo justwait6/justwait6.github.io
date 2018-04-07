@@ -61,6 +61,47 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-blog3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/07/blog3/" class="article-date">
+  <time datetime="2018-04-07T02:09:06.000Z" itemprop="datePublished">2018-04-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/07/blog3/">remove left recursion</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p></p><h1>设计算法消除左递归</h1><br>在查找“怎样判断计算器输入合法”问题时，遇到了感兴趣的编译原理的词法分析和语法分析问题。在语法分析部分呢，使用的是LL1方法，因此对于文法需要消除左递归。于是就到了本博客论述的正题：设计算法消除左递归<p></p>
+<h3>0.知识回顾</h3>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/07/blog3/" data-id="cjfor120b0001pwszu9hqkg0y" class="article-share-link">Teilen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/compiler/">compiler</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-blog2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/04/03/blog2/" class="article-date">
@@ -88,7 +129,7 @@
 <p></p><h3>1.加载Driver</h3><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Connection conn = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">    System.out.println(<span class="string">"load mysql driver success!"</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">    System.out.println(<span class="string">"load mysql driver failed"</span>);</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p></p>
 <p></p><h3>2.连接Database</h3><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    conn = DriverManager.getConnection(<span class="string">"jdbc:mysql://localhost/pca"</span>, <span class="string">"root"</span>, <span class="string">"123456"</span>);</span><br><span class="line">    System.out.println(<span class="string">"connect mysql success!"</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">    System.out.println(<span class="string">"connect mysql failed"</span>);</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p></p>
 <p></p><h3>3.执行Statement</h3><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">Statement stmt = <span class="keyword">null</span>;</span><br><span class="line">ResultSet rs = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    stmt = conn.createStatement();</span><br><span class="line">    <span class="comment">// rs = stmt.executeQuery("select * from provinces")</span></span><br><span class="line">    <span class="keyword">if</span> (stmt.execute(<span class="string">"select * from provinces"</span>)) &#123;</span><br><span class="line">        rs = stmt.getResultSet();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> (rs.next()) &#123;</span><br><span class="line">            System.out.println(rs.getInt(<span class="string">"ID"</span>) </span><br><span class="line">                    + rs.getString(<span class="string">"province"</span>) </span><br><span class="line">                    + rs.getInt(<span class="string">"provinceId"</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">    System.out.println(<span class="string">"failed to execute the sql statement"</span>);</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (rs != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            rs.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SQLException e) &#123;&#125;</span><br><span class="line">        </span><br><span class="line">        rs = <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (stmt != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            stmt.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SQLException e) &#123;&#125;</span><br><span class="line">        </span><br><span class="line">        stmt = <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p></p>
-<p></p><h3>4.几个Tips</h3><br>1.在Step 3中，<b>try–catch–finally </b>语句块，借用mysql document中的一段话 <br><br><b> It is a good idea to release resources in finally{} block in any <br><br>reverse order of their creation if they are no longer needed. </b><p></p>
+<p></p><h3>4.几个Tips</h3><br>1.在Step 3中，<b>try–catch–finally </b>语句块，借用mysql document中的一段话 <br><br><b> It is a good idea to release resources in finally{} block in any reverse order of their creation if they are no longer needed. </b><p></p>
 <p>2.没用用到<b>PrepareStatement</b>，将在下次好好Illustrate一下</p>
 <p></p><h3>5.Conclusion</h3><br>终于自己照着官网做了一遍，妈妈再也不用担心我用<b>百度知道</b>了 <br><br>成就感嘛，肯定会有啦！<p></p>
 <p></p><h5>引用：</h5><p></p>
@@ -99,7 +140,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/03/blog2/" data-id="cjfoqn66b00003csz8d78tu39" class="article-share-link">Teilen</a>
+      <a data-url="http://yoursite.com/2018/04/03/blog2/" data-id="cjfor12060000pwsz8nposjtq" class="article-share-link">Teilen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
@@ -138,7 +179,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/13/my-first-blog/" data-id="cjfoqn66g00013csz7na77v6x" class="article-share-link">Teilen</a>
+      <a data-url="http://yoursite.com/2018/03/13/my-first-blog/" data-id="cjfor120g0004pwsz2hs392ov" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -183,7 +224,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/13/hello-world/" data-id="cjfoqn66j00033cszny2irurq" class="article-share-link">Teilen</a>
+      <a data-url="http://yoursite.com/2018/03/13/hello-world/" data-id="cjfor120f0003pwsz0cnjxy82" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -206,7 +247,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/compiler/">compiler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li></ul>
     </div>
   </div>
 
@@ -216,7 +257,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/java/" style="font-size: 10px;">java</a>
+      <a href="/tags/compiler/" style="font-size: 10px;">compiler</a> <a href="/tags/java/" style="font-size: 10px;">java</a>
     </div>
   </div>
 
@@ -236,6 +277,10 @@
     <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/04/07/blog3/">remove left recursion</a>
+          </li>
         
           <li>
             <a href="/2018/04/03/blog2/">jdbc database</a>
