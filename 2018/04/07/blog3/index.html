@@ -7,17 +7,17 @@
   
   <title>remove left recursion | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="设计算法消除左递归在查找“怎样判断计算器输入合法”问题时，遇到了感兴趣的编译原理的词法分析和语法分析问题。在语法分析部分呢，使用的是LL1方法，因此对于文法需要消除左递归。于是就到了本博客论述的正题：设计算法消除左递归 0.知识回顾这里直接copy 维基百科 的内容啦！0.1.直接左递归，通俗来说，就是：A\to A\alpha">
+  <meta name="description" content="设计算法消除左递归在查找“怎样判断计算器输入合法”问题时，遇到了感兴趣的编译原理的词法分析和语法分析问题。在语法分析部分呢，使用的是LL1方法，因此对于文法需要消除左递归。于是就到了本博客论述的正题：设计算法消除左递归 0.知识回顾这里直接copy 维基百科 的内容啦！0.1.直接左递归，通俗来说，就是：A -&amp;gt; A,alpha">
 <meta name="keywords" content="compiler">
 <meta property="og:type" content="article">
 <meta property="og:title" content="remove left recursion">
 <meta property="og:url" content="http://yoursite.com/2018/04/07/blog3/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="设计算法消除左递归在查找“怎样判断计算器输入合法”问题时，遇到了感兴趣的编译原理的词法分析和语法分析问题。在语法分析部分呢，使用的是LL1方法，因此对于文法需要消除左递归。于是就到了本博客论述的正题：设计算法消除左递归 0.知识回顾这里直接copy 维基百科 的内容啦！0.1.直接左递归，通俗来说，就是：A\to A\alpha">
-<meta property="og:updated_time" content="2018-04-07T04:06:38.804Z">
+<meta property="og:description" content="设计算法消除左递归在查找“怎样判断计算器输入合法”问题时，遇到了感兴趣的编译原理的词法分析和语法分析问题。在语法分析部分呢，使用的是LL1方法，因此对于文法需要消除左递归。于是就到了本博客论述的正题：设计算法消除左递归 0.知识回顾这里直接copy 维基百科 的内容啦！0.1.直接左递归，通俗来说，就是：A -&amp;gt; A,alpha">
+<meta property="og:updated_time" content="2018-04-07T04:11:19.225Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="remove left recursion">
-<meta name="twitter:description" content="设计算法消除左递归在查找“怎样判断计算器输入合法”问题时，遇到了感兴趣的编译原理的词法分析和语法分析问题。在语法分析部分呢，使用的是LL1方法，因此对于文法需要消除左递归。于是就到了本博客论述的正题：设计算法消除左递归 0.知识回顾这里直接copy 维基百科 的内容啦！0.1.直接左递归，通俗来说，就是：A\to A\alpha">
+<meta name="twitter:description" content="设计算法消除左递归在查找“怎样判断计算器输入合法”问题时，遇到了感兴趣的编译原理的词法分析和语法分析问题。在语法分析部分呢，使用的是LL1方法，因此对于文法需要消除左递归。于是就到了本博客论述的正题：设计算法消除左递归 0.知识回顾这里直接copy 维基百科 的内容啦！0.1.直接左递归，通俗来说，就是：A -&amp;gt; A,alpha">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -88,12 +88,12 @@
       
         <p><script type="text/javascript" src="./ASCIIMathML.js"></script></p>
 <p></p><h1>设计算法消除左递归</h1><br>在查找“怎样判断计算器输入合法”问题时，遇到了感兴趣的编译原理的词法分析和语法分析问题。在语法分析部分呢，使用的是LL1方法，因此对于文法需要消除左递归。于是就到了本博客论述的正题：设计算法消除左递归<p></p>
-<p></p><h3>0.知识回顾</h3><br>这里直接copy <a href="http://en.wikipedia.org/wiki/Left_recursion#Direct_left_recursion" target="_blank">维基百科</a> 的内容啦！<br><br><b>0.1.直接左递归</b>，通俗来说，就是：<br><br><code>A\to A\alpha</code><p></p>
+<p></p><h3>0.知识回顾</h3><br>这里直接copy <a href="http://en.wikipedia.org/wiki/Left_recursion#Direct_left_recursion" target="_blank">维基百科</a> 的内容啦！<br><br><b>0.1.直接左递归</b>，通俗来说，就是：<br><br><code>A -&gt; A,alpha</code><p></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/07/blog3/" data-id="cjfouy1zw0001hwsz7o6yh8ok" class="article-share-link">Teilen</a>
+      <a data-url="http://yoursite.com/2018/04/07/blog3/" data-id="cjfov3uwk0001f4szv26g29ex" class="article-share-link">Teilen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/compiler/">compiler</a></li></ul>
