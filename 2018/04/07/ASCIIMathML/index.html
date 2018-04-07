@@ -7,12 +7,16 @@
   
   <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="/* ASCIIMathML.js ============== This file contains JavaScript functions to convert ASCII math notation and (some) LaTeX to Presentation MathML. The conversion is done while the HTML page loads, and s">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/04/07/ASCIIMathML/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="/* ASCIIMathML.js ============== This file contains JavaScript functions to convert ASCII math notation and (some) LaTeX to Presentation MathML. The conversion is done while the HTML page loads, and s">
+<meta property="og:updated_time" content="2018-04-07T03:11:06.276Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="/* ASCIIMathML.js ============== This file contains JavaScript functions to convert ASCII math notation and (some) LaTeX to Presentation MathML. The conversion is done while the HTML page loads, and s">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -59,9 +63,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-ASCIIMathML" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-ASCIIMathML" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/04/07/ASCIIMathML/" class="article-date">
   <time datetime="2018-04-07T03:19:05.618Z" itemprop="datePublished">2018-04-07</time>
@@ -812,184 +814,19 @@ function parseMath(str,latex) {
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-blog3" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/04/07/blog3/" class="article-date">
-  <time datetime="2018-04-07T02:09:06.000Z" itemprop="datePublished">2018-04-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/07/blog3/">remove left recursion</a>
-    </h1>
+    <a href="/2018/04/07/blog3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">remove left recursion</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><script type="text/javascript" src="./ASCIIMathML.js"></script></p>
-<p></p><h1>设计算法消除左递归</h1><br>在查找“怎样判断计算器输入合法”问题时，遇到了感兴趣的编译原理的词法分析和语法分析问题。在语法分析部分呢，使用的是LL1方法，因此对于文法需要消除左递归。于是就到了本博客论述的正题：设计算法消除左递归<p></p>
-<p></p><h3>0.知识回顾</h3><br>这里直接copy <a href="http://en.wikipedia.org/wiki/Left_recursion#Direct_left_recursion" target="_blank">维基百科</a> 的内容啦！<br><br><b>0.1.直接左递归</b>，通俗来说，就是：<br><br><code>A\to A\alpha</code><p></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/07/blog3/" data-id="cjfouy1zw0001hwsz7o6yh8ok" class="article-share-link">Teilen</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/compiler/">compiler</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-blog2" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/04/03/blog2/" class="article-date">
-  <time datetime="2018-04-03T11:52:42.000Z" itemprop="datePublished">2018-04-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/03/blog2/">jdbc database</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p></p><h1>使用jdbc连接数据库</h1><br>之前学习网上视频教程的时候，使用过jdbc连接数据库。不过是照着他的代码打的，记忆不够深刻。 <br><br>现在只看官方文档，重新做了一遍。 <br><p></p>
-<p></p><h3>0.前期准备：</h3><br>IDE：eclipse <br><br>JAR：mysql-connector-java-5.1.46.jar <br><br>新建一个java web项目，将jdbc的jar包添加到项目中。 <br><p></p>
-<p></p><h3>1.加载Driver</h3><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Connection conn = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">    System.out.println(<span class="string">"load mysql driver success!"</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">    System.out.println(<span class="string">"load mysql driver failed"</span>);</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p></p>
-<p></p><h3>2.连接Database</h3><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    conn = DriverManager.getConnection(<span class="string">"jdbc:mysql://localhost/pca"</span>, <span class="string">"root"</span>, <span class="string">"123456"</span>);</span><br><span class="line">    System.out.println(<span class="string">"connect mysql success!"</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">    System.out.println(<span class="string">"connect mysql failed"</span>);</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p></p>
-<p></p><h3>3.执行Statement</h3><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">Statement stmt = <span class="keyword">null</span>;</span><br><span class="line">ResultSet rs = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    stmt = conn.createStatement();</span><br><span class="line">    <span class="comment">// rs = stmt.executeQuery("select * from provinces")</span></span><br><span class="line">    <span class="keyword">if</span> (stmt.execute(<span class="string">"select * from provinces"</span>)) &#123;</span><br><span class="line">        rs = stmt.getResultSet();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> (rs.next()) &#123;</span><br><span class="line">            System.out.println(rs.getInt(<span class="string">"ID"</span>) </span><br><span class="line">                    + rs.getString(<span class="string">"province"</span>) </span><br><span class="line">                    + rs.getInt(<span class="string">"provinceId"</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">    System.out.println(<span class="string">"failed to execute the sql statement"</span>);</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (rs != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            rs.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SQLException e) &#123;&#125;</span><br><span class="line">        </span><br><span class="line">        rs = <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (stmt != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            stmt.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SQLException e) &#123;&#125;</span><br><span class="line">        </span><br><span class="line">        stmt = <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p></p>
-<p></p><h3>4.几个Tips</h3><br>1.在Step 3中，<b>try–catch–finally </b>语句块，借用mysql document中的一段话 <br><br><b> It is a good idea to release resources in finally{} block in any reverse order of their creation if they are no longer needed. </b><p></p>
-<p>2.没用用到<b>PrepareStatement</b>，将在下次好好Illustrate一下</p>
-<p></p><h3>5.Conclusion</h3><br>终于自己照着官网做了一遍，妈妈再也不用担心我用<b>百度知道</b>了 <br><br>成就感嘛，肯定会有啦！<p></p>
-<p></p><h5>引用：</h5><p></p>
-<ol>
-<li><a href="https://dev.mysql.com/doc/connector-j/5.1/en/connector-j-usagenotes-statements.html" target="_blank">mysql官方文档</a> </li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/03/blog2/" data-id="cjfouy1zw0000hwszwftws977" class="article-share-link">Teilen</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-my-first-blog" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/03/13/my-first-blog/" class="article-date">
-  <time datetime="2018-03-13T12:22:16.000Z" itemprop="datePublished">2018-03-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/13/my-first-blog/">My first blog</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>一直以来,都有一个梦想:能够在一个足够简洁的网站上,安静的奉上自己的博客.<br>今天,这个梦想实现了.<br>我希望,写博客能够成为我的爱好.同时,赠自己一句话:千里之行,始于足下.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/13/my-first-blog/" data-id="cjfouy1zw0003hwszmf2o7epa" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/03/13/hello-world/" class="article-date">
-  <time datetime="2018-03-13T11:40:19.875Z" itemprop="datePublished">2018-03-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/13/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/13/hello-world/" data-id="cjfouy1zw0004hwszmdq4o8vr" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
 
 </section>
         
