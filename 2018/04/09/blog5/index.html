@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="..">
 <meta property="og:description" content="记一次Java综合小练习最近开学入门学习Java,在今天上午之前,这个综合练习对我来说都是有难度的,哈哈.感觉主要是没有思路吧,没套路的纯情学生一枚 0.问题描述这是一道慕课网上的综合小练习.针对的是Java入门.我天,有和我同样水平的小伙伴,这道练习很适合你哦 好了,废话不多说,上题目描述:12345根据所学知识,编写一个控制台版的&amp;quot;答答租车系统&amp;quot;. 功能:1. 展示所有可租">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-09T09:39:05.747Z">
+<meta property="og:updated_time" content="2018-04-09T09:42:04.794Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java入门练习">
 <meta name="twitter:description" content="记一次Java综合小练习最近开学入门学习Java,在今天上午之前,这个综合练习对我来说都是有难度的,哈哈.感觉主要是没有思路吧,没套路的纯情学生一枚 0.问题描述这是一道慕课网上的综合小练习.针对的是Java入门.我天,有和我同样水平的小伙伴,这道练习很适合你哦 好了,废话不多说,上题目描述:12345根据所学知识,编写一个控制台版的&amp;quot;答答租车系统&amp;quot;. 功能:1. 展示所有可租">
@@ -339,7 +339,7 @@
 <p>还有一点,以前不会有制表符,用了之后居然系这样滴,鸡冻<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">序号  汽车名称    租金      容量  剩余数量</span><br><span class="line">1.  AudiA4  500.0元/天    4人  20辆</span><br><span class="line">2.  Mazda   150.0元/天    5人  34辆</span><br><span class="line">3.  Songhu  400.0元/天    4吨  3辆</span><br><span class="line">4.  IVECO   1000.0元/天   20吨 1辆</span><br><span class="line">5.  Picca6  998.0元/天    20人,5辆  12辆</span><br></pre></td></tr></table></figure></p>
 <p>什么,控制台里好好滴,复制到这里来这个卵样??不多解释了,大家认为它默认对齐就好 <br><br><b>还有一个特别重要的一点:</b> <br><br>在Map类遍历的例子里(段落3.0开头),使用了 <b>instanceof PickupCar</b>这个东东,实在是没有想到更好的办法呢.主要来源于自己写的那种 <b>伪继承</b>方法吧,这个词语也是解决不了Pickup问题google时查到滴!看起来好高端的样子,抽时间学习一下! <br><br>慕课上一个呢称叫睿智狂人的小伙伴就很牛,写出了下面的思路:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1、创建两个接口（载客接口A-载客量）、（载货接口B-载货量），载客和货接口C extend 载客接口A，载货接口B（载客量、载货量），</span><br><span class="line">一个抽象父类Car（车型、单价--&gt;元/天）；</span><br><span class="line"></span><br><span class="line">2、实现-卡车类 extend 父类Car implement 载货接口B；</span><br><span class="line"></span><br><span class="line">     实现-客车类 extend 父类Car implement 载客接口A；</span><br><span class="line"></span><br><span class="line">     实现-皮卡类 extend 父类Car implement 载客和货接口C；</span><br><span class="line"></span><br><span class="line">3、租车系统类：一维数组 实例化 卡车对象、客车对象 和 皮卡对象；</span><br><span class="line"></span><br><span class="line">4、客户选车、分类汇总车辆后，输出租车明细与总价。</span><br></pre></td></tr></table></figure></p>
 <p>仔细想了想,这种思路确实比我那好很多,hah</p>
-<p></p><h3>4.小Conclusion</h3><br>虽然看上去挺简单,但是实践出真知,越发自己动手能力不咋地啊 <br><br>和我一样想入门学Java却踌躇的小伙伴,这个小综合练习是个不错的推荐哦~<p></p>
+<p></p><h3>4.小Conclusion</h3><br>虽然看上去挺简单,但是实践出真知,越发自己动手能力不咋地啊 <br><br>咻咻,<br>和我一样想入门学Java却踌躇的小伙伴,这个小综合练习是个不错的推荐哦~<p></p>
 <p></p><h5>引用</h5><br>1.<a href="https://www.imooc.com/video/3334" target="_blank" rel="noopener">慕课网Java入门第二季</a><p></p>
 
       
