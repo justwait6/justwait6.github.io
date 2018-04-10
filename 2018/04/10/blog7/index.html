@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="记一次Java小练习: 扑克游戏Demo最近发现慕课网挺不错,在学知识的同时还能够实践编写程序.  0.问题描述慕课视频课程里有这样一个小作业,内容如下:12345678910111.创建一副扑克牌, 不包括大小王2.创建两名玩家, 玩家有ID,姓名,手牌(扑克牌集合)等属性3.洗牌: 打乱扑克牌顺序4.发牌: 每个玩家发两张牌5.比输赢规则为:两个人分别取自己最大的手牌,然后在比较这两张牌,牌大">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简单扑克游戏">
+<meta property="og:url" content="http://yoursite.com/2018/04/10/blog7/index.html">
+<meta property="og:site_name" content="..">
+<meta property="og:description" content="记一次Java小练习: 扑克游戏Demo最近发现慕课网挺不错,在学知识的同时还能够实践编写程序.  0.问题描述慕课视频课程里有这样一个小作业,内容如下:12345678910111.创建一副扑克牌, 不包括大小王2.创建两名玩家, 玩家有ID,姓名,手牌(扑克牌集合)等属性3.洗牌: 打乱扑克牌顺序4.发牌: 每个玩家发两张牌5.比输赢规则为:两个人分别取自己最大的手牌,然后在比较这两张牌,牌大">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-10T12:38:23.752Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="简单扑克游戏">
+<meta name="twitter:description" content="记一次Java小练习: 扑克游戏Demo最近发现慕课网挺不错,在学知识的同时还能够实践编写程序.  0.问题描述慕课视频课程里有这样一个小作业,内容如下:12345678910111.创建一副扑克牌, 不包括大小王2.创建两名玩家, 玩家有ID,姓名,手牌(扑克牌集合)等属性3.洗牌: 打乱扑克牌顺序4.发牌: 每个玩家发两张牌5.比输赢规则为:两个人分别取自己最大的手牌,然后在比较这两张牌,牌大">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/10/blog7/"/>
+
+
+
+
+
+  <title>简单扑克游戏 | ..</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">..</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/10/blog7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="justwait6">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/kato.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="..">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">简单扑克游戏</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-10T19:19:21+08:00">
+                2018-04-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p></p><h1>记一次Java小练习: 扑克游戏Demo</h1><br>最近发现慕课网挺不错,在学知识的同时还能够实践编写程序. <br><p></p>
+<p></p><h3>0.问题描述</h3><br>慕课视频课程里有这样一个小作业,内容如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1.创建一副扑克牌, 不包括大小王</span><br><span class="line">2.创建两名玩家, 玩家有ID,姓名,手牌(扑克牌集合)等属性</span><br><span class="line">3.洗牌: 打乱扑克牌顺序</span><br><span class="line">4.发牌: 每个玩家发两张牌</span><br><span class="line">5.比输赢</span><br><span class="line">规则为:两个人分别取自己最大的手牌,然后在比较这两张牌,牌大的玩家获胜.</span><br><span class="line"></span><br><span class="line">关于牌的大小顺序,点数有小到大2,3,...,Q,K,A.先比较点数大小,点数大的是大牌.</span><br><span class="line">若点数相等,在按花色比大小: 黑桃&gt;红桃&gt;草花&gt;方片</span><br><span class="line">举例: 红桃A &gt; 黑桃Q, 原因是A的点数比Q大</span><br><span class="line">      草花3 &gt; 方片3, 原因是两者点数一样, 但草花&gt;方片</span><br></pre></td></tr></table></figure><p></p>
+<p></p><h3>1.开始Thinking</h3><br>这里边,可以这样子: <br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. 每一张扑克牌看作一个类,索性叫它Poker类吧,有点数和花色属性</span><br><span class="line">2. 一副扑克牌就是一个泛型集合,集合元素是Poker类</span><br><span class="line">3. 每一个玩家都有ID,姓名等属性,因此来一个Player类</span><br><span class="line">4. 洗牌: 给每一张扑克牌一个编号,编号就像这样: 1, 2, ..., 52  只需要打乱这52个编号就ok啦</span><br><span class="line">5. 比较牌的大小,我们可以让Poker类实现Comparable接口,重写compareTo()方法</span><br></pre></td></tr></table></figure><p></p>
+<p></p><h3>2.代码Implementation</h3><br>好了,废话少说. <br><br><b>Poker类:</b><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> Suit &#123;</span><br><span class="line">    SPADE,HEART, DIAMOND, CLUB;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Poker</span> <span class="keyword">implements</span> <span class="title">Comparable</span>&lt;<span class="title">Poker</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> index;</span><br><span class="line">    <span class="keyword">int</span> point;</span><br><span class="line">    Suit suit;</span><br><span class="line">    String name;</span><br><span class="line">    </span><br><span class="line">    Poker(<span class="keyword">int</span> index) &#123;</span><br><span class="line">        <span class="keyword">this</span>.index = index;</span><br><span class="line">        calcSuit();</span><br><span class="line">        calcPoint();</span><br><span class="line">        calcName();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    Poker(Suit suit, <span class="keyword">int</span> point) &#123;</span><br><span class="line">        <span class="keyword">this</span>.suit = suit;</span><br><span class="line">        <span class="keyword">this</span>.point = point;</span><br><span class="line">        calcIndex();</span><br><span class="line">        calcName();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setIndex</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.index = index;</span><br><span class="line">        calcSuit();</span><br><span class="line">        calcPoint();</span><br><span class="line">        calcName();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">calcSuit</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> ((<span class="keyword">this</span>.index - <span class="number">1</span>)/<span class="number">13</span>) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">this</span>.suit = Suit.SPADE;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">this</span>.suit = Suit.HEART;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">            <span class="keyword">this</span>.suit = Suit.DIAMOND;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">            <span class="keyword">this</span>.suit = Suit.CLUB;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">calcPoint</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.point = index % <span class="number">13</span>;</span><br><span class="line">        <span class="comment">// 如果index % 13 = 0, 要将point设置为13</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.point == <span class="number">0</span>) <span class="keyword">this</span>.point = <span class="number">13</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">calcIndex</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (suit == Suit.SPADE) &#123;</span><br><span class="line">            <span class="keyword">this</span>.index = point;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (suit == Suit.HEART) &#123;</span><br><span class="line">            <span class="keyword">this</span>.index = <span class="number">13</span> + point;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (suit == Suit.DIAMOND) &#123;</span><br><span class="line">            <span class="keyword">this</span>.index = <span class="number">26</span> + point;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (suit == Suit.CLUB) &#123;</span><br><span class="line">            <span class="keyword">this</span>.index = <span class="number">39</span> + point;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">calcName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        StringBuilder string = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">switch</span> (<span class="keyword">this</span>.suit) &#123;</span><br><span class="line">        <span class="keyword">case</span> SPADE:</span><br><span class="line">            string.append(<span class="string">"黑桃"</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> HEART:</span><br><span class="line">            string.append(<span class="string">"红桃"</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> DIAMOND:</span><br><span class="line">            string.append(<span class="string">"草花"</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> CLUB:</span><br><span class="line">            string.append(<span class="string">"方片"</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">switch</span> (<span class="keyword">this</span>.point) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">13</span>:</span><br><span class="line">            string.append(<span class="string">'A'</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">12</span>:</span><br><span class="line">            string.append(<span class="string">'K'</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">11</span>:</span><br><span class="line">            string.append(<span class="string">'Q'</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">10</span>:</span><br><span class="line">            string.append(<span class="string">'J'</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">9</span>:</span><br><span class="line">            string.append(<span class="string">"10"</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">char</span> ch = String.valueOf(<span class="keyword">this</span>.point+<span class="number">1</span>).charAt(<span class="number">0</span>);</span><br><span class="line">            string.append(ch);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.name = string.toString();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Poker p)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 比较点数,点数大者胜</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.point &gt; p.point)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.point &lt; p.point)</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.point == p.point) &#123;</span><br><span class="line">            <span class="comment">// 点数一样大时,比较花色: 黑桃&gt;红桃&gt;草花&gt;方片</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.index/<span class="number">13</span> &lt; p.index/<span class="number">13</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.index/<span class="number">13</span> &gt; p.index/<span class="number">13</span>)</span><br><span class="line">                <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 点数,花色均一样,返回相等</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p></p>
+<p><b>Player类:</b><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Player</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> id;</span><br><span class="line">    String name;</span><br><span class="line">    ArrayList&lt;Poker&gt; pokersInHand = <span class="keyword">new</span> ArrayList&lt;Poker&gt;();</span><br><span class="line">    </span><br><span class="line">    Player(<span class="keyword">int</span> id, String name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">obtainPoker</span><span class="params">(Poker p)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.pokersInHand.add(p);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function">Poker <span class="title">getMaxPoker</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        pokersInHand.sort(<span class="keyword">null</span>);</span><br><span class="line">        <span class="keyword">return</span> pokersInHand.get(pokersInHand.size() - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printPokers</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.print(<span class="keyword">this</span>.name + <span class="string">"的手牌: ["</span>);</span><br><span class="line">        <span class="keyword">for</span> (Poker poker : pokersInHand) &#123;</span><br><span class="line">            System.out.print(poker.getName() + <span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">']'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><b>PokerGame类:</b><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">import</span> java.util.TreeMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PokerGame</span> </span>&#123;</span><br><span class="line">    Scanner console = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">    Player player1, player2;</span><br><span class="line">    ArrayList&lt;Poker&gt; pokers = <span class="keyword">new</span> ArrayList&lt;Poker&gt;();</span><br><span class="line">    TreeMap&lt;Integer, Integer&gt; pokerSet = <span class="keyword">new</span> TreeMap&lt;Integer, Integer&gt;();</span><br><span class="line">    </span><br><span class="line">    PokerGame() &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">52</span>; i++) &#123;</span><br><span class="line">            pokers.add(<span class="keyword">new</span> Poker(i+<span class="number">1</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printPoker</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> rowCount = <span class="number">13</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, len = pokers.size(); i &lt;len; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i % rowCount == <span class="number">0</span>) System.out.println();</span><br><span class="line">            System.out.print(pokers.get(i).getName() + <span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function">String <span class="title">parseLine</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String string = console.nextLine();</span><br><span class="line">        <span class="keyword">return</span> string;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getValidId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> validId = <span class="number">0</span>;</span><br><span class="line">        String idString = <span class="keyword">this</span>.parseLine();</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                validId = Integer.parseInt(idString);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (NumberFormatException e) &#123;</span><br><span class="line">                System.out.println(<span class="string">"输入有误,请输入数字."</span>);</span><br><span class="line">                idString = parseLine();</span><br><span class="line">            &#125;   </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> validId;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">shuffle</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        pokerSet.clear();</span><br><span class="line">        Random random = <span class="keyword">new</span> Random();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, len = pokers.size(); i &lt; len; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> randomInt = random.nextInt(<span class="number">52</span>) + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (pokerSet.containsValue(randomInt)) &#123;</span><br><span class="line">                i--;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                pokerSet.put(i+<span class="number">1</span>, randomInt);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        pokers.clear();</span><br><span class="line">        <span class="keyword">for</span> (Map.Entry&lt;Integer, Integer&gt; entry : pokerSet.entrySet()) &#123;</span><br><span class="line">            <span class="keyword">int</span> pokerIndex = entry.getValue();</span><br><span class="line">            pokers.add(<span class="keyword">new</span> Poker(pokerIndex));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"游戏初始化..."</span>);</span><br><span class="line">        PokerGame pg = <span class="keyword">new</span> PokerGame();</span><br><span class="line">        System.out.println(<span class="string">"初始牌集合:"</span>);</span><br><span class="line">        pg.printPoker();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 创建玩家1</span></span><br><span class="line">        System.out.println(<span class="string">"请输入玩家1的ID:"</span>);</span><br><span class="line">        <span class="keyword">int</span> id1 = pg.getValidId();</span><br><span class="line">        System.out.println(<span class="string">"请输入玩家1的姓名:"</span>);</span><br><span class="line">        String name1 = pg.parseLine();</span><br><span class="line">        pg.player1 = <span class="keyword">new</span> Player(id1, name1);</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 创建玩家2</span></span><br><span class="line">        System.out.println(<span class="string">"请输入玩家2的ID:"</span>);</span><br><span class="line">        <span class="keyword">int</span> id2 = pg.getValidId();</span><br><span class="line">        System.out.println(<span class="string">"请输入玩家2的姓名:"</span>);</span><br><span class="line">        String name2 = pg.parseLine();</span><br><span class="line">        pg.player2 = <span class="keyword">new</span> Player(id2, name2);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 欢迎词</span></span><br><span class="line">        System.out.println(<span class="string">"欢迎进入玩牌游戏:"</span> + pg.player1.getName() </span><br><span class="line">                + <span class="string">", "</span> + pg.player2.getName());</span><br><span class="line">        <span class="comment">// 开始洗牌</span></span><br><span class="line">        System.out.println(<span class="string">"-------洗牌阶段--------"</span>);</span><br><span class="line">        System.out.println(<span class="string">"洗牌中..."</span>);</span><br><span class="line">        pg.shuffle();</span><br><span class="line">        System.out.println(<span class="string">"洗牌完成!"</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 发牌阶段,玩家1和玩家2分别获得两张牌</span></span><br><span class="line">        System.out.println(<span class="string">"-------发牌阶段--------"</span>);</span><br><span class="line">        System.out.println(<span class="string">"向"</span> + pg.player1.getName() + <span class="string">"发第1张牌"</span>);</span><br><span class="line">        pg.player1.obtainPoker(pg.pokers.get(<span class="number">0</span>));</span><br><span class="line">        System.out.println(<span class="string">"向"</span> + pg.player2.getName() + <span class="string">"发第1张牌"</span>);</span><br><span class="line">        pg.player2.obtainPoker(pg.pokers.get(<span class="number">1</span>));</span><br><span class="line">        System.out.println(<span class="string">"向"</span> + pg.player1.getName() + <span class="string">"发第2张牌"</span>);</span><br><span class="line">        pg.player1.obtainPoker(pg.pokers.get(<span class="number">2</span>));</span><br><span class="line">        System.out.println(<span class="string">"向"</span> + pg.player2.getName() + <span class="string">"发第2张牌"</span>);</span><br><span class="line">        pg.player2.obtainPoker(pg.pokers.get(<span class="number">3</span>));</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 开始比较牌的大小,确定谁输谁赢</span></span><br><span class="line">        System.out.println(<span class="string">"\n-------裁定结果--------"</span>);</span><br><span class="line">        System.out.println(pg.player1.getName() + <span class="string">"的最大手牌为"</span> </span><br><span class="line">                + pg.player1.getMaxPoker().getName());</span><br><span class="line">        System.out.println(pg.player2.getName() + <span class="string">"的最大手牌为"</span> </span><br><span class="line">                + pg.player2.getMaxPoker().getName());</span><br><span class="line">        <span class="keyword">if</span> (pg.player1.getMaxPoker().compareTo(pg.player2.getMaxPoker()) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            System.out.println(pg.player1.getName() + <span class="string">"获胜"</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(pg.player2.getName() + <span class="string">"获胜"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 亮出手牌以及本次的随机洗牌</span></span><br><span class="line">        System.out.println(<span class="string">"\n-------后续--------"</span>);</span><br><span class="line">        System.out.println(<span class="string">"双方的手牌为:"</span>);</span><br><span class="line">        pg.player1.printPokers();</span><br><span class="line">        pg.player2.printPokers();</span><br><span class="line">        System.out.println(<span class="string">"本次洗牌结果:"</span>);</span><br><span class="line">        pg.printPoker();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p></p><h3>3.试玩Result</h3><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">游戏初始化...</span><br><span class="line">初始牌集合:</span><br><span class="line"></span><br><span class="line">黑桃2 黑桃3 黑桃4 黑桃5 黑桃6 黑桃7 黑桃8 黑桃9 黑桃10 黑桃J 黑桃Q 黑桃K 黑桃A </span><br><span class="line">红桃2 红桃3 红桃4 红桃5 红桃6 红桃7 红桃8 红桃9 红桃10 红桃J 红桃Q 红桃K 红桃A </span><br><span class="line">草花2 草花3 草花4 草花5 草花6 草花7 草花8 草花9 草花10 草花J 草花Q 草花K 草花A </span><br><span class="line">方片2 方片3 方片4 方片5 方片6 方片7 方片8 方片9 方片10 方片J 方片Q 方片K 方片A </span><br><span class="line"></span><br><span class="line">请输入玩家1的ID:</span><br><span class="line">2</span><br><span class="line">请输入玩家1的姓名:</span><br><span class="line">凹凸曼</span><br><span class="line">请输入玩家2的ID:</span><br><span class="line">998</span><br><span class="line">请输入玩家2的姓名:</span><br><span class="line">小怪兽</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">欢迎进入玩牌游戏:凹凸曼, 小怪兽</span><br><span class="line">-------洗牌阶段--------</span><br><span class="line">洗牌中...</span><br><span class="line">洗牌完成!</span><br><span class="line"></span><br><span class="line">-------发牌阶段--------</span><br><span class="line">向凹凸曼发第1张牌</span><br><span class="line">向小怪兽发第1张牌</span><br><span class="line">向凹凸曼发第2张牌</span><br><span class="line">向小怪兽发第2张牌</span><br><span class="line"></span><br><span class="line">-------裁定结果--------</span><br><span class="line">凹凸曼的最大手牌为黑桃5</span><br><span class="line">小怪兽的最大手牌为草花J</span><br><span class="line">小怪兽获胜</span><br><span class="line"></span><br><span class="line">-------后续--------</span><br><span class="line">双方的手牌为:</span><br><span class="line">凹凸曼的手牌: [黑桃2 黑桃5 ]</span><br><span class="line">小怪兽的手牌: [黑桃10 草花J ]</span><br><span class="line">本次洗牌结果:</span><br><span class="line"></span><br><span class="line">黑桃5 草花J 黑桃2 黑桃10 红桃Q 方片6 方片3 红桃6 黑桃K 红桃J 草花3 方片A 红桃5 </span><br><span class="line">红桃9 黑桃J 方片7 草花Q 红桃2 红桃10 黑桃Q 草花K 黑桃9 黑桃6 草花A 黑桃4 草花9 </span><br><span class="line">方片4 草花2 方片5 方片9 红桃3 草花10 草花7 方片8 黑桃A 红桃4 黑桃7 红桃A 方片J </span><br><span class="line">方片K 黑桃8 方片10 草花4 方片2 黑桃3 草花5 草花6 红桃8 草花8 方片Q 红桃K 红桃7</span><br></pre></td></tr></table></figure><p></p>
+<p></p><h3>4.学到的Tips</h3><br><b>4.1.map遍历:</b>这个算是回顾了,不久之前刚用到这个<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (Map.Entry&lt;Integer, Integer&gt; entry : pokerSet.entrySet()) &#123;</span><br><span class="line">    <span class="keyword">int</span> pokerIndex = entry.getValue();</span><br><span class="line">    pokers.add(<span class="keyword">new</span> Poker(pokerIndex));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p></p>
+<p><b>4.2.重写comparable接口类</b>方法<b>compareTo()</b>别忘了在Comparable后加泛型哟,像这样子: <b>Comparable&lt;Poker&gt;</b><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Poker</span> <span class="keyword">implements</span> <span class="title">Comparable</span>&lt;<span class="title">Poker</span>&gt; </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Poker p)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 比较点数,点数大者胜</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.point &gt; p.point)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.point &lt; p.point)</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.point == p.point) &#123;</span><br><span class="line">            <span class="comment">// 点数一样大时,比较花色: 黑桃&gt;红桃&gt;草花&gt;方片</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.index/<span class="number">13</span> &lt; p.index/<span class="number">13</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.index/<span class="number">13</span> &gt; p.index/<span class="number">13</span>)</span><br><span class="line">                <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 点数,花色均一样,返回相等</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><b>4.3.</b>另外,学到了一个快捷键 <b>Ctrl + Shift + O</b>,用于快速导入包和删除没有用到的包(不知道说得对不对,hah) <br><br><b>4.4.1</b>另外两个非常小的点: 一个是使用了之前博客提及的<b>Random类</b>, <br><br><b>4.4.2</b>另外一个是使用<b>try…catch</b>来验证id输入的合法性,像下面这样:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PokerGame</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">    ...</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getValidId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> validId = <span class="number">0</span>;</span><br><span class="line">        String idString = <span class="keyword">this</span>.parseLine();</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                validId = Integer.parseInt(idString);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (NumberFormatException e) &#123;</span><br><span class="line">                System.out.println(<span class="string">"输入有误,请输入数字."</span>);</span><br><span class="line">                idString = parseLine();</span><br><span class="line">            &#125;   </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> validId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p></p><h3>5.我的Summary</h3><br>这次小练习,感觉不错哦 <br><br>我相信,对于有一点点儿入门基础,动手能力弱,想开始编写小东西的小伙伴,这是不错的练习哦 <br><br>好了,内容就到这里,各位,下次再见!<p></p>
+<p></p><h5>引用</h5><br>1.<a href="https://www.imooc.com/video/5475" target="_blank">简易扑克牌游戏</a> <br><br>2.<a href="https://www.cnblogs.com/happyPawpaw/archive/2013/04/09/3009553.html" target="_blank">Java enum的用法详解</a><p></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/10/blog6/" rel="next" title="Math.random()趣味学习">
+                <i class="fa fa-chevron-left"></i> Math.random()趣味学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/kato.jpg"
+                alt="justwait6" />
+            
+              <p class="site-author-name" itemprop="name">justwait6</p>
+              <p class="site-description motion-element" itemprop="description">A thousand journey is started by taking the first step.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">记一次Java小练习: 扑克游戏Demo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.1.</span> <span class="nav-text">0.问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.2.</span> <span class="nav-text">1.开始Thinking</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.3.</span> <span class="nav-text">2.代码Implementation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.4.</span> <span class="nav-text">3.试玩Result</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.5.</span> <span class="nav-text">4.学到的Tips</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.6.</span> <span class="nav-text">5.我的Summary</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.6.0.1.</span> <span class="nav-text">引用</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">justwait6</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
