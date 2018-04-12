@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="设计算法消除左递归在查找“怎样判断计算器输入合法”问题时，遇到了感兴趣的编译原理的词法分析和语法分析问题。在语法分析部分呢，使用的是LL1方法，因此对于文法需要消除左递归。于是就到了本博客论述的正题：设计算法消除左递归 0.知识回顾这里直接copy 维基百科 的内容啦！这里有中文的维基：传送门 1234567891011直接左递归: A -&amp;gt; Aa | b消除方法:   A -&amp;gt; a">
+<meta name="description" content="设计算法消除左递归在查找“怎样判断计算器输入合法”问题时，遇到了感兴趣的编译原理的词法分析和语法分析问题。在语法分析部分呢，使用的是LL1方法，因此对于文法需要消除左递归。于是就到了本博客论述的正题：设计算法消除左递归 0.知识回顾这里直接copy 维基百科 的内容啦！这里有中文的维基：传送门 1234567891011直接左递归: A -&amp;gt; Aa | b消除方法:   A -&amp;gt; aA">
 <meta name="keywords" content="java,编译原理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="消除左递归">
 <meta property="og:url" content="http://yoursite.com/2018/04/07/blog3/index.html">
 <meta property="og:site_name" content="..">
-<meta property="og:description" content="设计算法消除左递归在查找“怎样判断计算器输入合法”问题时，遇到了感兴趣的编译原理的词法分析和语法分析问题。在语法分析部分呢，使用的是LL1方法，因此对于文法需要消除左递归。于是就到了本博客论述的正题：设计算法消除左递归 0.知识回顾这里直接copy 维基百科 的内容啦！这里有中文的维基：传送门 1234567891011直接左递归: A -&amp;gt; Aa | b消除方法:   A -&amp;gt; a">
+<meta property="og:description" content="设计算法消除左递归在查找“怎样判断计算器输入合法”问题时，遇到了感兴趣的编译原理的词法分析和语法分析问题。在语法分析部分呢，使用的是LL1方法，因此对于文法需要消除左递归。于是就到了本博客论述的正题：设计算法消除左递归 0.知识回顾这里直接copy 维基百科 的内容啦！这里有中文的维基：传送门 1234567891011直接左递归: A -&amp;gt; Aa | b消除方法:   A -&amp;gt; aA">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-07T10:06:13.437Z">
+<meta property="og:updated_time" content="2018-04-12T13:44:01.201Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="消除左递归">
-<meta name="twitter:description" content="设计算法消除左递归在查找“怎样判断计算器输入合法”问题时，遇到了感兴趣的编译原理的词法分析和语法分析问题。在语法分析部分呢，使用的是LL1方法，因此对于文法需要消除左递归。于是就到了本博客论述的正题：设计算法消除左递归 0.知识回顾这里直接copy 维基百科 的内容啦！这里有中文的维基：传送门 1234567891011直接左递归: A -&amp;gt; Aa | b消除方法:   A -&amp;gt; a">
+<meta name="twitter:description" content="设计算法消除左递归在查找“怎样判断计算器输入合法”问题时，遇到了感兴趣的编译原理的词法分析和语法分析问题。在语法分析部分呢，使用的是LL1方法，因此对于文法需要消除左递归。于是就到了本博客论述的正题：设计算法消除左递归 0.知识回顾这里直接copy 维基百科 的内容啦！这里有中文的维基：传送门 1234567891011直接左递归: A -&amp;gt; Aa | b消除方法:   A -&amp;gt; aA">
 
 
 
@@ -320,8 +320,7 @@
       
 
       
-        <p><script type="text/javascript" src="./ASCIIMathML.js"></script></p>
-<p></p><h1>设计算法消除左递归</h1><br>在查找“怎样判断计算器输入合法”问题时，遇到了感兴趣的编译原理的词法分析和语法分析问题。在语法分析部分呢，使用的是LL1方法，因此对于文法需要消除左递归。于是就到了本博客论述的正题：设计算法消除左递归<p></p>
+        <p></p><h1>设计算法消除左递归</h1><br>在查找“怎样判断计算器输入合法”问题时，遇到了感兴趣的编译原理的词法分析和语法分析问题。在语法分析部分呢，使用的是LL1方法，因此对于文法需要消除左递归。于是就到了本博客论述的正题：设计算法消除左递归<p></p>
 <p></p><h3>0.知识回顾</h3><br>这里直接copy <a href="http://en.wikipedia.org/wiki/Left_recursion#Direct_left_recursion" target="_blank">维基百科</a> 的内容啦！<br><br>这里有中文的维基：<a href="https://zh.wikipedia.org/wiki/左遞歸" target="_blank">传送门</a> <br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">直接左递归: A -&gt; Aa | b</span><br><span class="line">消除方法:   A -&gt; aA&apos; | bA&apos;</span><br><span class="line">            A&apos;-&gt; aA&apos; | ~</span><br><span class="line">间接左递归: A -&gt; Bb | b</span><br><span class="line">            B -&gt; Aa | a</span><br><span class="line">消除方法:</span><br><span class="line">    先转换为直接左递归,   </span><br><span class="line">            A -&gt; Aab | ab | b</span><br><span class="line">    再消除,</span><br><span class="line">            A -&gt; abA&apos; | bA&apos;</span><br><span class="line">            A&apos;-&gt; abA&apos; | ~</span><br></pre></td></tr></table></figure><p></p>
 <p>上面举了一个简单示例,那其他我就不介绍了，hah </p>
 <p></p><h3>1.算法Pseudo</h3><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">从 i = 1 到 n &#123;</span><br><span class="line">    从 j = 1 到 i - 1 &#123;</span><br><span class="line">        设Aj -&gt; d1 | d2 | ... | dk</span><br><span class="line">        将所有规则 Ai -&gt; Aj y换成</span><br><span class="line">        Ai -&gt; d1 y | d2 y | ... | dk y</span><br><span class="line">        移除Ai规则中的直接左递归</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p></p>
