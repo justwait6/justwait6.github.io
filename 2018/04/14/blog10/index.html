@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+  
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Java文件IO,奈何要CH**SE你首先抛上一大堆概念:字节流,字符流,序列化… 然后,我就懵了 123为什么没有非常简单的抽象化概念,而不用去考虑那些繁琐的IO问题... 为什么需要记忆介么多我真想说: f*^&amp;amp;?--!*.k 当然,那是在学习Java的IO之前的吐槽 学完之后,我发现,其实文件IO的API.用起来特爽 这一切都封装得很好,你只需简单的调用API, 拿来就用 因此,本博">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文件IO初步">
+<meta property="og:url" content="http://yoursite.com/2018/04/14/blog10/index.html">
+<meta property="og:site_name" content="..">
+<meta property="og:description" content="Java文件IO,奈何要CH**SE你首先抛上一大堆概念:字节流,字符流,序列化… 然后,我就懵了 123为什么没有非常简单的抽象化概念,而不用去考虑那些繁琐的IO问题... 为什么需要记忆介么多我真想说: f*^&amp;amp;?--!*.k 当然,那是在学习Java的IO之前的吐槽 学完之后,我发现,其实文件IO的API.用起来特爽 这一切都封装得很好,你只需简单的调用API, 拿来就用 因此,本博">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-14T14:12:37.383Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="文件IO初步">
+<meta name="twitter:description" content="Java文件IO,奈何要CH**SE你首先抛上一大堆概念:字节流,字符流,序列化… 然后,我就懵了 123为什么没有非常简单的抽象化概念,而不用去考虑那些繁琐的IO问题... 为什么需要记忆介么多我真想说: f*^&amp;amp;?--!*.k 当然,那是在学习Java的IO之前的吐槽 学完之后,我发现,其实文件IO的API.用起来特爽 这一切都封装得很好,你只需简单的调用API, 拿来就用 因此,本博">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/14/blog10/"/>
+
+
+
+
+
+  <title>文件IO初步 | ..</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">..</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/14/blog10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="justwait6">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/kato.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="..">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">文件IO初步</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-14T20:30:12+08:00">
+                2018-04-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p></p><h1>Java文件IO,奈何要CH**SE你</h1><br>首先抛上一大堆概念:字节流,字符流,序列化… <br><br>然后,我就懵了 <br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">为什么没有非常简单的抽象化概念,而不用去考虑那些繁琐的IO问题... </span><br><span class="line">为什么需要记忆介么多</span><br><span class="line">我真想说: f*^&amp;?--!*.k</span><br></pre></td></tr></table></figure><p></p>
+<p>当然,那是在学习Java的IO之前的吐槽 <br><br>学完之后,我发现,其实文件IO的API.用起来特爽 <br><br>这一切都封装得很好,你只需简单的调用API, 拿来就用 <br><br>因此,本博客内容叫做: <b>记java的两个API调用,文件IO相关</b></p>
+<p></p><h3>0.前情回顾</h3><br>在之前的一篇博客(瞧我这惊人的记忆力, 时隔一周之久居然还能记住,叫做<b>文件IO的简单TEST</b>)里, 玩了这几个Stuff:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FileInputStream/FileOutputStream</span><br><span class="line">BufferedInputStream/BufferedOutputStream</span><br></pre></td></tr></table></figure><p></p>
+<p>在玩了上面两个入门级API之后,今天继续来玩下面几个入门级API<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">BufferedReader/BufferedWriter</span><br><span class="line">InputStreamReader/OutputStreamWriter</span><br><span class="line">PrintWriter</span><br><span class="line">ObjectInputStream/ObjectOutputStream</span><br></pre></td></tr></table></figure></p>
+<p></p><h3>1.跟我Play</h3><br>step1.既然是文件相关,那么我们需要File类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">File file = <span class="keyword">new</span> File(<span class="string">"e:\\goodness\\耻辱.AVI"</span>);</span><br></pre></td></tr></table></figure><p></p>
+<p>step2.流(Stream)的概念,我们需要将文件放进流中,来实现IO<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FileInputStream fis = <span class="keyword">new</span> FileInputStream(file);</span><br></pre></td></tr></table></figure></p>
+<p>step3.使用一个Reader来读取流,就是我们今天玩的第二个Stuff: <b>InputStreamReader</b><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">InputStreamReader isr = <span class="keyword">new</span> InputStreamReader(fis, <span class="string">"GBK"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>step4.再用一个<b>BufferedReader</b>,今天要玩的第一个Stuff<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BufferedReader br = <span class="keyword">new</span> BufferedReader(isr);</span><br></pre></td></tr></table></figure></p>
+<p>当然,经过合并,就成了下边的代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">BufferedReader br = <span class="keyword">new</span> BufferedReader(</span><br><span class="line">        <span class="keyword">new</span> InputStreamReader(</span><br><span class="line">                <span class="keyword">new</span> FileInputStream(<span class="string">"e:\\goodness\\耻辱.AVI"</span>),<span class="string">"GBK"</span>));</span><br></pre></td></tr></table></figure></p>
+<p>那么类似,<b>BufferedWriter</b>就系介样<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">BufferedWriter bw = <span class="keyword">new</span> BufferedWriter(</span><br><span class="line">        <span class="keyword">new</span> OutputStreamWriter(</span><br><span class="line">                <span class="keyword">new</span> FileOutputStream(<span class="string">"e:\\学习资料\\日语学习一夜通.AVI"</span>), <span class="string">"UTF-8"</span>));</span><br></pre></td></tr></table></figure></p>
+<p>通过So Easy的Demo,一半儿的内容就学完了.这里是拷贝时的用法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">String lenString;</span><br><span class="line"><span class="keyword">while</span> ((lenString = br.readLine()) != <span class="keyword">null</span>) &#123;</span><br><span class="line">    bw.write(lenString);</span><br><span class="line">    bw.newLine();</span><br><span class="line">    bw.flush();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>当然最后不要忘了关闭它/她们</p>
+<p></p><h3>2.我用PrintWrter</h3><br>可以使用PrintWriter来替代BufferedWriter, 像介样:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PrintWriter pw = <span class="keyword">new</span> PrintWriter(<span class="string">"e:\\学习资料\\日语学习一夜通.AVI"</span>, <span class="string">"UTF-8"</span>);</span><br></pre></td></tr></table></figure><p></p>
+<p>在读取时,会介样:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> ((lenString = br.readLine()) != <span class="keyword">null</span> ) &#123;</span><br><span class="line">    pw.println(lenString);</span><br><span class="line">    pw.flush();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>当然看/玩完后,别忘了关掉它/她们<br>你瞧,这么轻松就学完了3个内容 <br><br>玩入门级API调用超Easy的啦</p>
+<p></p><h3>3.编码乱码</h3><br>乱码可不是什么好东西,可系,怎么解决乱码问题呢? <br><br>如果文件是GBK的,那在读入时需要指明charset是GBK <br><br>此时如果用UTF-8去读,乱码!!! <br><br>那可不是 <br><br>我想要的 <br><br><br><br>写入时指定UTF-8,表示你希望文件是按该UTF-8编码将文本转化为字节存储的 <br><br>写入时指定GBK,表示你希望文件是按该GBK编码将文本转化为字节存储的 <br><br>写入时指定ISO-8859-1,表示你希望文件是按该ISO-8859-1编码将文本转化为字节存储的 <br><br><br><br>一句话:指定啥,就按啥存<br><br>当读取时,也要指定对应方式读取保证不乱码<p></p>
+<p></p><h3>4.序列化</h3><br>最后一个内容,序列化:Serializable接口,其实呢,就是简简单单的转换而已. <br><br>序列化: 将对象转换为若干字节组成的字符 <br><br>反序列化: 将若干自己组成的字符转换成对象 <br><br>一个简单的例子来说明 <br><br>例如,我有一个这样的类,继承了<b>Serializable</b><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Beauty</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name = <span class="string">"Megumi Kato"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age = <span class="number">20</span>;</span><br><span class="line">    <span class="keyword">private</span> String title = <span class="string">"Beauty"</span>;</span><br><span class="line">    </span><br><span class="line">    Beauty() &#123;&#125;</span><br><span class="line">    Beauty(String name, <span class="keyword">int</span> age, String title) &#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">        <span class="keyword">this</span>.title = title;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getTitle</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> title;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTitle</span><span class="params">(String title)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.title = title;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Beauty [name="</span> + name + <span class="string">", age="</span> + age + <span class="string">", title="</span> + title + <span class="string">"]"</span>;</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p></p>
+<p>然后, 我这样使用<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CharacterStream</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">       </span><br><span class="line">        <span class="comment">// Serialize</span></span><br><span class="line">        String destObj = <span class="string">"d:\\Download\\myBeauty.obj"</span>;</span><br><span class="line">        Beauty kato = <span class="keyword">new</span> Beauty(<span class="string">"Megumi Kato"</span>, <span class="number">20</span>, <span class="string">"my dream girl"</span>);</span><br><span class="line">        ObjectOutputStream oos = <span class="keyword">new</span> ObjectOutputStream(<span class="keyword">new</span> FileOutputStream(destObj));</span><br><span class="line">        oos.writeObject(kato);</span><br><span class="line">        System.out.println(kato);</span><br><span class="line">        oos.close();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Deserializ</span></span><br><span class="line">        String srcObj = destObj;</span><br><span class="line">        ObjectInputStream ois  = <span class="keyword">new</span> ObjectInputStream(<span class="keyword">new</span> FileInputStream(srcObj));</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Beauty myDreamGirl =  (Beauty)ois.readObject();</span><br><span class="line">            System.out.println(myDreamGirl);</span><br><span class="line">            System.out.println(myDreamGirl.getName());</span><br><span class="line">            System.out.println(myDreamGirl.getAge());</span><br><span class="line">            System.out.println(myDreamGirl.getTitle());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">            <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        ois.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>结果就是这样:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Beauty [name=Megumi Kato, age=20, title=my dream girl]</span><br><span class="line">Beauty [name=Megumi Kato, age=20, title=my dream girl]</span><br><span class="line">Megumi Kato</span><br><span class="line">20</span><br><span class="line">my dream girl</span><br></pre></td></tr></table></figure></p>
+<p>当然,还有一些更高级的东西,就留着以后**吧</p>
+<p></p><h3>5.小结</h3><br>简单的过一了遍文件IO <br><br>使用它做了灰常简单的练习 <br><br>不说了,我还有要事<br><br>去刷学习资料一夜通.AVI<p></p>
+<p></p><h4>引用</h4><p></p>
+<ol>
+<li><a href="https://www.imooc.com/learn/123" target="_blank">Cedar: 文件传输基础——Java IO流</a></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/12/blog9/" rel="next" title="CSS实现三级菜单">
+                <i class="fa fa-chevron-left"></i> CSS实现三级菜单
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/kato.jpg"
+                alt="justwait6" />
+            
+              <p class="site-author-name" itemprop="name">justwait6</p>
+              <p class="site-description motion-element" itemprop="description">A thousand journey is started by taking the first step.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Java文件IO,奈何要CH**SE你</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.1.</span> <span class="nav-text">0.前情回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.2.</span> <span class="nav-text">1.跟我Play</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.3.</span> <span class="nav-text">2.我用PrintWrter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.4.</span> <span class="nav-text">3.编码乱码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.5.</span> <span class="nav-text">4.序列化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.6.</span> <span class="nav-text">5.小结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.6.1.</span> <span class="nav-text">引用</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">justwait6</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/velocity/1.3.1/velocity.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/velocity/1.3.1/velocity.ui.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
