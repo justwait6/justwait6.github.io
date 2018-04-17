@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+  
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Servlet配合前端,魅力无限之前写过一篇Servlet,玩了Servlet里边的一些API 今天, 又来玩它们吧! 0.说在前面菜鸟级博客用到了:   html表单知识, 很容易学会的哦 html表格知识, 简单的哦 简单css, 让页面美观哦旧内容:  回顾建立Servlet的三个步骤: a.继承HttpServlet     b.重写Get(), Post()方法      c.注册xml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="blog11nimei">
+<meta property="og:url" content="http://yoursite.com/2018/04/17/blog11nimei/index.html">
+<meta property="og:site_name" content="..">
+<meta property="og:description" content="Servlet配合前端,魅力无限之前写过一篇Servlet,玩了Servlet里边的一些API 今天, 又来玩它们吧! 0.说在前面菜鸟级博客用到了:   html表单知识, 很容易学会的哦 html表格知识, 简单的哦 简单css, 让页面美观哦旧内容:  回顾建立Servlet的三个步骤: a.继承HttpServlet     b.重写Get(), Post()方法      c.注册xml">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-17T03:08:18.295Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="blog11nimei">
+<meta name="twitter:description" content="Servlet配合前端,魅力无限之前写过一篇Servlet,玩了Servlet里边的一些API 今天, 又来玩它们吧! 0.说在前面菜鸟级博客用到了:   html表单知识, 很容易学会的哦 html表格知识, 简单的哦 简单css, 让页面美观哦旧内容:  回顾建立Servlet的三个步骤: a.继承HttpServlet     b.重写Get(), Post()方法      c.注册xml">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/17/blog11nimei/"/>
+
+
+
+
+
+  <title>blog11nimei | ..</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">..</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/17/blog11nimei/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="justwait6">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/kato.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="..">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">blog11nimei</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-17T11:08:00+08:00">
+                2018-04-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p></p><h1>Servlet配合前端,魅力无限</h1><br>之前写过一篇Servlet,玩了Servlet里边的一些API <br><br>今天, 又来玩它们吧!<p></p>
+<p></p><h3>0.说在前面</h3><br>菜鸟级博客用到了: <br><p></p>
+<ol>
+<li>html表单知识, 很容易学会的哦<br></li>
+<li>html表格知识, 简单的哦<br></li>
+<li>简单css, 让页面美观哦<br><br>旧内容: <br></li>
+<li>回顾建立Servlet的三个步骤: a.继承HttpServlet     b.重写Get(), Post()方法      c.注册xml <br></li>
+<li>回顾”如何防止页面乱码” <br><br>介篇博客呢,主要介绍简单的Servlet.代码中包括下面几点:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. 使用request.getParameter()/request.gerParameterValues()方法获取前端发过来的参数</span><br><span class="line">2. 页面跳转: request.getRequestDispatcher(&quot;file path of jsp page&quot;).forward(request, respond)方法</span><br><span class="line">3. session会话</span><br><span class="line">4. javaBean</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>当然啦,作为一个菜鸟,我认为首先理解它的思路, <br>而不是在一个地方死磕,要求深入理会一些细节. <br><br>对一下流程就ok啦 <br><br>细节可以留到后面去深入吧</p>
+<p></p><h3>1.实现Target</h3><br>本文由两个超easy的页面组成,一个是注册页面,另一个是用户信息页面. <br><br>本文的目标是从注册界面获取数据,然后到后台传输数据,最后将数据显示到用户信息界面 <br><p></p>
+<p></p><h3>2.关键Code</h3><br>注册界面<b>表单部分</b> <br><br>哎, 就是这样, 初看乱得不行. <br><br>个人觉得: html,xml之类的代码看起来不整洁<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">class</span>=<span class="string">"frmRegister"</span> <span class="attr">action</span>=<span class="string">"servlet/RegisterServlet"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"username"</span>&gt;</span>用户名<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"username"</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">placeholder</span>=<span class="string">"你的名字"</span> <span class="attr">value</span>=<span class="string">""</span>&gt;</span> <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"userpassword"</span>&gt;</span>密码<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">id</span>=<span class="string">"userpassword"</span> <span class="attr">name</span>=<span class="string">"userpassword"</span> <span class="attr">placeholder</span>=<span class="string">"输入密码"</span> <span class="attr">value</span>=<span class="string">""</span>&gt;</span> <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"userpassword"</span>&gt;</span>确认密码<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">id</span>=<span class="string">"confirmpassword"</span> <span class="attr">name</span>=<span class="string">"confirmpassword"</span> <span class="attr">placeholder</span>=<span class="string">"确认密码"</span> <span class="attr">value</span>=<span class="string">""</span>&gt;</span> <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"gender"</span>&gt;</span>性别<span class="tag">&lt;/<span class="name">label</span>&gt;</span> <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">name</span>=<span class="string">"gender"</span> <span class="attr">value</span>=<span class="string">"男"</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>男<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">name</span>=<span class="string">"gender"</span> <span class="attr">value</span>=<span class="string">"女"</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>女<span class="tag">&lt;/<span class="name">span</span>&gt;</span> <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"birthday"</span>&gt;</span>出生日期<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"birthday"</span> <span class="attr">name</span>=<span class="string">"birthday"</span> <span class="attr">size</span>=<span class="string">"10"</span></span></span><br><span class="line"><span class="tag">                  <span class="attr">maxlength</span>=<span class="string">"10"</span> <span class="attr">placeholder</span>=<span class="string">"出生日期"</span> <span class="attr">onclick</span>=<span class="string">"new Calendar().show(this);"</span> <span class="attr">readonly</span>=<span class="string">"readonly"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"email"</span>&gt;</span>电子邮箱<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">id</span>=<span class="string">"email"</span> <span class="attr">name</span>=<span class="string">"email"</span> <span class="attr">placeholder</span>=<span class="string">"你的邮箱"</span> <span class="attr">value</span>=<span class="string">""</span>&gt;</span> <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"favorites"</span>&gt;</span>爱好<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"favorites"</span> <span class="attr">name</span>=<span class="string">"favorites"</span> <span class="attr">multiple</span>=<span class="string">"multiple"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"NBA"</span>&gt;</span>NBA<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"音乐"</span>&gt;</span>音乐<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"跑步"</span>&gt;</span>跑步<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"上网"</span>&gt;</span>上网<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"introduce"</span>&gt;</span>自我介绍<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">id</span>=<span class="string">"introduce"</span> <span class="attr">name</span>=<span class="string">"introduce"</span> <span class="attr">rows</span>=<span class="string">"8"</span> <span class="attr">cols</span>=<span class="string">"80"</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span> <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">name</span>=<span class="string">""</span> <span class="attr">value</span>=<span class="string">"提交"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure><p></p>
+<p>用户信息界面<b>表格部分</b><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">jsp:useBean</span> <span class="attr">id</span>=<span class="string">"regUser"</span>  <span class="attr">class</span>=<span class="string">"entity.User"</span> <span class="attr">scope</span>=<span class="string">"session"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">table</span> <span class="attr">class</span>=<span class="string">"userinfo_table"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">th</span>&gt;</span>信息项<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">th</span>&gt;</span>信息内容<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>姓名:<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">jsp:getProperty</span> <span class="attr">name</span>=<span class="string">"regUser"</span> <span class="attr">property</span>=<span class="string">"name"</span> /&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>出生日期:<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">%</span></span></span><br><span class="line"><span class="tag">        <span class="attr">SimpleDateFormat</span> <span class="attr">sdf</span> = <span class="string">new</span> <span class="attr">SimpleDateFormat</span>("<span class="attr">yyyy</span>年<span class="attr">MM</span>月<span class="attr">dd</span>日");</span></span><br><span class="line"><span class="tag">        <span class="attr">String</span> <span class="attr">tempDate</span> = <span class="string">sdf.format(regUser.getBirthday());</span></span></span><br><span class="line"><span class="tag">        %&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">%=tempDate</span> %&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>性别:<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">jsp:getProperty</span> <span class="attr">name</span>=<span class="string">"regUser"</span> <span class="attr">property</span>=<span class="string">"gender"</span> /&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>邮箱:<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">jsp:getProperty</span> <span class="attr">name</span>=<span class="string">"regUser"</span> <span class="attr">property</span>=<span class="string">"email"</span> /&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>爱好:<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">%</span></span></span><br><span class="line"><span class="tag">        <span class="attr">for</span> (<span class="attr">String</span> <span class="attr">string</span> <span class="attr">:</span> <span class="attr">regUser.getFavorites</span>()) &#123;</span></span><br><span class="line"><span class="tag">        %&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">%=string</span> %&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">%</span></span></span><br><span class="line"><span class="tag">        &#125;</span></span><br><span class="line"><span class="tag">        %&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>个人介绍:<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">jsp:getProperty</span> <span class="attr">name</span>=<span class="string">"regUser"</span> <span class="attr">property</span>=<span class="string">"introduce"</span> /&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>servlet的Post()方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">    req.setCharacterEncoding(<span class="string">"UTF-8"</span>);</span><br><span class="line">    resp.setCharacterEncoding(<span class="string">"UTF-8"</span>);</span><br><span class="line">    resp.setContentType(<span class="string">"text/html;charset=UTF-8"</span>);</span><br><span class="line"></span><br><span class="line">    User u = <span class="keyword">new</span> User();</span><br><span class="line">    u.setName(req.getParameter(<span class="string">"username"</span>));</span><br><span class="line">    u.setPassword(req.getParameter(<span class="string">"userpassword"</span>));</span><br><span class="line">    SimpleDateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd"</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 判断用户是否填写了出生日期</span></span><br><span class="line">    <span class="keyword">if</span> (req.getParameter(<span class="string">"birthday"</span>) == <span class="string">""</span>) &#123;</span><br><span class="line">        Calendar calendar = Calendar.getInstance();</span><br><span class="line">        calendar.set(<span class="number">2000</span>, <span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">        u.setBirthday(calendar.getTime());</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            u.setBirthday(sdf.parse(req.getParameter(<span class="string">"birthday"</span>)));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ParseException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 判断用户是否填写了性别</span></span><br><span class="line">    <span class="keyword">if</span> (req.getParameter(<span class="string">"gender"</span>) == <span class="keyword">null</span>) &#123;       </span><br><span class="line">        u.setGender(<span class="string">"未知"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        String gender = req.getParameter(<span class="string">"gender"</span>).equals(<span class="string">"男"</span>)?<span class="string">"男"</span>:<span class="string">"女"</span>;         </span><br><span class="line">        u.setGender(gender);</span><br><span class="line">    &#125;</span><br><span class="line">    u.setEmail(req.getParameter(<span class="string">"email"</span>));</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 判断用户是否输入了爱好</span></span><br><span class="line">    <span class="keyword">if</span> (req.getParameterValues(<span class="string">"favorites"</span>) == <span class="keyword">null</span>) &#123;</span><br><span class="line">        String[] s = <span class="keyword">new</span> String[<span class="number">1</span>];</span><br><span class="line">        s[<span class="number">0</span>] = <span class="string">"未填写"</span>;</span><br><span class="line">        u.setFavorites(s);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        u.setFavorites(req.getParameterValues(<span class="string">"favorites"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    u.setIntroduce(req.getParameter(<span class="string">"introduce"</span>));</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 往输出流里写了东西,会在req.getRequestDispatcher("../userinfo.jsp").forward(req, resp) 行 报错</span></span><br><span class="line">    <span class="comment">// PrintWriter pw = resp.getWriter();</span></span><br><span class="line">    <span class="comment">// pw.println("&lt;p&gt;页面跳转中...&lt;/p&gt;");</span></span><br><span class="line">    System.out.println(u);</span><br><span class="line">    <span class="comment">// pw.close();</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 将用户保存在会话中</span></span><br><span class="line">    req.getSession().setAttribute(<span class="string">"regUser"</span>, u);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 跳转到另外一个页面</span></span><br><span class="line">    req.getRequestDispatcher(<span class="string">"../userinfo.jsp"</span>).forward(req, resp);     </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p></p><h3>3.结果展示</h3><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">跳过...</span><br></pre></td></tr></table></figure><p></p>
+<p></p><h3>4.踩踩小坑</h3><br>1.<b>Servlet.service() for servlet [jsp] threw exception java.lang.NullPointerException</b> <br><br>原因分析: 如果判断传入的爱好(favorites)是否等于null的话,出现这样的异常, <br>因为我们在后边调用了foreach对favorites进行遍历,而没有考虑它为null的可能性 <br><br>解决办法: 判断favorites是否为空,若为空,则添加一个”未填写”字符串到里面,最后输出 <br>一个更好的办法是,若为空,则不调用foreach字符串 <br><br><br>2.<b> According to TLD, tag [jsp:getProperty] must be empty, but is not</b> <br>原因分析: 估计只有粗心的小伙伴会犯介样的错 <br><br>解决办法: 加一个因**原因漏掉的斜线<b> “/“</b><br><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;jsp:getProperty name=<span class="string">"blabla"</span> property=<span class="string">"blabla"</span> &gt;</span><br></pre></td></tr></table></figure><p></p>
+<p>更换为<br><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;jsp:getProperty name=<span class="string">"blabla"</span> property=<span class="string">"blabla"</span> /&gt;</span><br></pre></td></tr></table></figure></p>
+<p>3.Servlet.service() for servlet [RegisterServlet] in context with path [/UserLogin] threw exception <br><br><b>java.lang.IllegalStateException: Cannot forward after response has been committed</b> <br><br>原因分析: 从一个页面跳到另一个页面, 然而却报出”响应被提交之后不能forward”,原来,我之前为了测试,在前边写了一个<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PrintWriter pw = resp.getWriter();</span><br><span class="line">pw.println(<span class="string">"&lt;p&gt;页面跳转中...&lt;/p&gt;"</span>);</span><br><span class="line"></span><br><span class="line">pw.close();</span><br></pre></td></tr></table></figure></p>
+<p>解决办法: 把这些打印到页面的输出注释掉<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// PrintWriter pw = resp.getWriter();</span><br><span class="line">// pw.println(&quot;&lt;p&gt;页面跳转中...&lt;/p&gt;&quot;);</span><br><span class="line"></span><br><span class="line">// pw.close();</span><br></pre></td></tr></table></figure></p>
+<p></p><h3>5.一个Summary</h3><br>不错,心满意足!好像快点成长起来!! <br><br>咦hah, 有Bug的感觉不错哦 <br><br>本来还挺想自己在做一点前端的验证的, 等空下来了自己在弄吧! <br><br>咻咻~<p></p>
+<p></p><h5>引用</h5><br>1.<a href="https://www.imooc.com/video/5553" target="_blank">Servlet获取表单数据</a> <br><br>2.<a href="https://www.w3schools.com/css/css_form.asp" target="_blank">CSS Forms</a>(需要梯子) <br><br>3.<a href="https://www.w3schools.com/css/css_table.asp" target="_blank">CSS Tables</a>(需要梯子) <br><p></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/14/blog10/" rel="next" title="文件IO初步">
+                <i class="fa fa-chevron-left"></i> 文件IO初步
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/kato.jpg"
+                alt="justwait6" />
+            
+              <p class="site-author-name" itemprop="name">justwait6</p>
+              <p class="site-description motion-element" itemprop="description">A thousand journey is started by taking the first step.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Servlet配合前端,魅力无限</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.1.</span> <span class="nav-text">0.说在前面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.2.</span> <span class="nav-text">1.实现Target</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.3.</span> <span class="nav-text">2.关键Code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.4.</span> <span class="nav-text">3.结果展示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.5.</span> <span class="nav-text">4.踩踩小坑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.6.</span> <span class="nav-text">5.一个Summary</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.6.0.1.</span> <span class="nav-text">引用</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">justwait6</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/velocity/1.3.1/velocity.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/velocity/1.3.1/velocity.ui.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
