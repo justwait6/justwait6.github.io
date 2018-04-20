@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+  
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="mysql,database," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Workbench导入.sql文件工具环境:123platform: Windows x64tool:     Workbenchdatabase: mysql 材料: 一个sql的script  0.问题描述使用Workbench建立了一个数据库, 名叫shopping 现在有一个script,script里是一张创建好的表以及该表包含的一些表项  要把这张表导入到shopping当中  1.解">
+<meta name="keywords" content="mysql,database">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Workbench导入sql文件">
+<meta property="og:url" content="http://yoursite.com/2018/04/20/blog13/index.html">
+<meta property="og:site_name" content="..">
+<meta property="og:description" content="Workbench导入.sql文件工具环境:123platform: Windows x64tool:     Workbenchdatabase: mysql 材料: 一个sql的script  0.问题描述使用Workbench建立了一个数据库, 名叫shopping 现在有一个script,script里是一张创建好的表以及该表包含的一些表项  要把这张表导入到shopping当中  1.解">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-20T14:08:58.832Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Workbench导入sql文件">
+<meta name="twitter:description" content="Workbench导入.sql文件工具环境:123platform: Windows x64tool:     Workbenchdatabase: mysql 材料: 一个sql的script  0.问题描述使用Workbench建立了一个数据库, 名叫shopping 现在有一个script,script里是一张创建好的表以及该表包含的一些表项  要把这张表导入到shopping当中  1.解">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/20/blog13/"/>
+
+
+
+
+
+  <title>Workbench导入sql文件 | ..</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">..</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/20/blog13/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="justwait6">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/kato.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="..">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Workbench导入sql文件</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-20T21:39:18+08:00">
+                2018-04-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p></p><h1>Workbench导入.sql文件</h1><br>工具环境:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">platform: Windows x64</span><br><span class="line">tool:     Workbench</span><br><span class="line">database: mysql</span><br></pre></td></tr></table></figure><p></p>
+<p>材料: 一个sql的script </p>
+<p></p><h3>0.问题描述</h3><br>使用Workbench建立了一个数据库, 名叫shopping <br><br>现在有一个script,script里是一张创建好的表以及该表包含的一些表项 <br> 要把这张表导入到shopping当中 <br><p></p>
+<p></p><h3>1.解决思路</h3><br>1.如果对mysql命令熟悉的话,直接对着cmd敲命令行就搞定了,但是俺记不住,还得找半天资料 <br><br>2.使用辅助工具,如本文里的Workbench.这也是我的选择<p></p>
+<p></p><h3>2.遇到困难</h3><br>创建一个新的数据库shopping还挺简单<br>工具图标栏 –&gt;  create a new schema in the connected server(三个圆柱叠起来那个) –&gt; 名称,字符集 <br><br>然后是运行.sql脚本(资源来自慕课网教学视频).如下<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Navicat MySQL Data Transfer</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Source Server         : MySQL50</span></span><br><span class="line"><span class="comment">Source Server Version : 50067</span></span><br><span class="line"><span class="comment">Source Host           : localhost:3306</span></span><br><span class="line"><span class="comment">Source Database       : shopping</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Target Server Type    : MYSQL</span></span><br><span class="line"><span class="comment">Target Server Version : 50067</span></span><br><span class="line"><span class="comment">File Encoding         : 65001</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Date: 2014-08-27 12:12:31</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SET</span> FOREIGN_KEY_CHECKS=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"><span class="comment">-- Table structure for items</span></span><br><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> <span class="string">`items`</span>;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`items`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> auto_increment,</span><br><span class="line">  <span class="string">`name`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">default</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`city`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">default</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`price`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">default</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`number`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">default</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`picture`</span> <span class="built_in">varchar</span>(<span class="number">500</span>) <span class="keyword">default</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span>  (<span class="string">`id`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> AUTO_INCREMENT=<span class="number">11</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"><span class="comment">-- Records of items</span></span><br><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`items`</span> <span class="keyword">VALUES</span> (<span class="string">'1'</span>, <span class="string">'沃特篮球鞋'</span>, <span class="string">'佛山'</span>, <span class="string">'180'</span>, <span class="string">'500'</span>, <span class="string">'001.jpg'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`items`</span> <span class="keyword">VALUES</span> (<span class="string">'2'</span>, <span class="string">'安踏运动鞋'</span>, <span class="string">'福州'</span>, <span class="string">'120'</span>, <span class="string">'800'</span>, <span class="string">'002.jpg'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`items`</span> <span class="keyword">VALUES</span> (<span class="string">'3'</span>, <span class="string">'耐克运动鞋'</span>, <span class="string">'广州'</span>, <span class="string">'500'</span>, <span class="string">'1000'</span>, <span class="string">'003.jpg'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`items`</span> <span class="keyword">VALUES</span> (<span class="string">'4'</span>, <span class="string">'阿迪达斯T血衫'</span>, <span class="string">'上海'</span>, <span class="string">'388'</span>, <span class="string">'600'</span>, <span class="string">'004.jpg'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`items`</span> <span class="keyword">VALUES</span> (<span class="string">'5'</span>, <span class="string">'李宁文化衫'</span>, <span class="string">'广州'</span>, <span class="string">'180'</span>, <span class="string">'900'</span>, <span class="string">'005.jpg'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`items`</span> <span class="keyword">VALUES</span> (<span class="string">'6'</span>, <span class="string">'小米3'</span>, <span class="string">'北京'</span>, <span class="string">'1999'</span>, <span class="string">'3000'</span>, <span class="string">'006.jpg'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`items`</span> <span class="keyword">VALUES</span> (<span class="string">'7'</span>, <span class="string">'小米2S'</span>, <span class="string">'北京'</span>, <span class="string">'1299'</span>, <span class="string">'1000'</span>, <span class="string">'007.jpg'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`items`</span> <span class="keyword">VALUES</span> (<span class="string">'8'</span>, <span class="string">'thinkpad笔记本'</span>, <span class="string">'北京'</span>, <span class="string">'6999'</span>, <span class="string">'500'</span>, <span class="string">'008.jpg'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`items`</span> <span class="keyword">VALUES</span> (<span class="string">'9'</span>, <span class="string">'dell笔记本'</span>, <span class="string">'北京'</span>, <span class="string">'3999'</span>, <span class="string">'500'</span>, <span class="string">'009.jpg'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`items`</span> <span class="keyword">VALUES</span> (<span class="string">'10'</span>, <span class="string">'ipad5'</span>, <span class="string">'北京'</span>, <span class="string">'5999'</span>, <span class="string">'500'</span>, <span class="string">'010.jpg'</span>);</span><br></pre></td></tr></table></figure><p></p>
+<p>直接file –&gt; Run SQL script –&gt; (设置好之后)Run, 汇报如下错误: <br><br> <b>Preparing…<br>Error executing “mysql.exe” –defaults-extra-file=c:\users\vector\appdata\local\temp\tmprmnfsh.cnf –protocol=tcp –port=3306 –host=localhost –user=root:<br>[Error 267] </b> <br><br>原因: 没有去折腾,hah <br><br>解决办法: <br><br>file –&gt; open SQL script –&gt; 编辑脚本, 在脚本开始处添加use shopping(use 数据库名) –&gt; 点击文本框左上角的<b>小闪电图标</b></p>
+<p></p><h3>3.小结</h3><br>Workbench比命令行好用 <br><br>好玩,哈哈<p></p>
+<p></p><h5>引用</h5><br>1.<a href="https://blog.csdn.net/u010801439/article/details/78762387" target="_blank">在workbench中导入.sql文件！</a><p></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
+          
+            <a href="/tags/database/" rel="tag"># database</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/19/blog12/" rel="next" title="eclipse复制项目">
+                <i class="fa fa-chevron-left"></i> eclipse复制项目
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/kato.jpg"
+                alt="justwait6" />
+            
+              <p class="site-author-name" itemprop="name">justwait6</p>
+              <p class="site-description motion-element" itemprop="description">A thousand journey is started by taking the first step.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Workbench导入.sql文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.1.</span> <span class="nav-text">0.问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.2.</span> <span class="nav-text">1.解决思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.3.</span> <span class="nav-text">2.遇到困难</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.4.</span> <span class="nav-text">3.小结</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.4.0.1.</span> <span class="nav-text">引用</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">justwait6</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/velocity/1.3.1/velocity.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/velocity/1.3.1/velocity.ui.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
